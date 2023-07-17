@@ -2,9 +2,33 @@
 <html>
 <head>
   <title>Novel 1</title>
+  <style>
+    /* CSS for the side menu */
+    #menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+
+    #menu a {
+      display: block;
+      margin-bottom: 5px;
+      text-decoration: none;
+      color: #000;
+    }
+  </style>
 </head>
 <body>
-  <h1>Novel 1</h1>
+  <!-- Side menu -->
+  <div id="menu">
+    <a href="#text1">Text 1</a>
+    <a href="#text2">Text 2</a>
+    <!-- Add more anchor links for each text file -->
+  </div>
+
+  <!-- Novel content -->
   <div id="novel-content"></div>
 
   <script>
@@ -23,6 +47,12 @@
 
           // Loop through the file names
           fileNames.forEach(function(fileName) {
+            // Create an anchor element with the file name as the ID
+            var anchor = document.createElement("a");
+            anchor.id = fileName.replace(".txt", "");
+            anchor.style.display = "block";
+            novelContent.appendChild(anchor);
+
             // Fetch each text file
             fetch(fileName)
               .then(function(response) {
@@ -32,7 +62,7 @@
                 // Create a <p> element and append the text content
                 var paragraph = document.createElement("p");
                 paragraph.textContent = fileContent;
-                novelContent.appendChild(paragraph);
+                anchor.appendChild(paragraph);
               })
               .catch(function(error) {
                 console.log("Error fetching " + fileName + ": " + error);
