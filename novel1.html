@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Novel 1</title>
+</head>
+<body>
+  <h1>Novel 1</h1>
+  <div id="novel-content"></div>
+
+  <script>
+    // Function to fetch and display the text files
+    function fetchTextFiles() {
+      var novelContent = document.getElementById("novel-content");
+
+      // Fetch the file names from the directory
+      fetch("novel/novel1/")
+        .then(function(response) {
+          return response.text();
+        })
+        .then(function(data) {
+          // Parse the HTML response to extract the file names
+          var parser = new DOMParser();
+          var htmlDoc = parser.parseFromString(data, "text/html");
+
+          // Get the list of files (anchor elements) from the parsed HTML
+          var fileElements = htmlDoc.querySelectorAll("a");
+
+          // Loop through the file elements
+          fileElements.forEach(function(fileElement) {
+            var fileName = fileElement.getAttribute("href");
+
+            // Process only the text files
+            if (fileName.endsWith(".txt")) {
+              var filePath = "novel/novel1/" + fileName;
+
+              // Fetch each text file
+              fetch(filePath)
+                .then(function(response) {
+                  return response.text();
+                })
+                .then(function(fileContent) {
+                  // Create a <p> element and append the text content
+                  var paragraph = document.createElement("p");
+                  paragraph.textContent = fileContent;
+                  novelContent.appendChild(paragraph);
+                })
+                .catch(function(error) {
+                  console.log("Error fetching " + fileName + ": " + error);
+                });
+            }
+          });
+        })
+        .catch(function(error) {
+          console.log("Error fetching directory listing: " + error);
+        });
+    }
+
+    // Call the fetchTextFiles function to fetch and display the text files
+    fetchTextFiles();
+  </script>
+</body>
+</html>
