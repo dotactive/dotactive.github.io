@@ -13,7 +13,7 @@
       var novelContent = document.getElementById("novel-content");
 
       // Fetch the file names from the directory
-      fetch("novel/novel1/")
+      fetch("/")
         .then(function(response) {
           return response.text();
         })
@@ -31,7 +31,7 @@
 
             // Process only the text files
             if (fileName.endsWith(".txt")) {
-              var filePath = "novel/novel1/" + fileName;
+              var filePath = "/" + fileName;
 
               // Fetch each text file
               fetch(filePath)
