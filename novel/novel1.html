@@ -36,10 +36,10 @@
           return response.json();
         })
         .then(function(data) {
-          // Get the list of file names
-          var fileNames = data.files;
+          // Get the list of file names and sort them alphabetically
+          var fileNames = data.files.sort();
 
-          // Loop through the file names in the correct order
+          // Loop through the sorted file names
           fileNames.forEach(function(fileName) {
             var listItem = document.createElement("li");
             var link = document.createElement("a");
