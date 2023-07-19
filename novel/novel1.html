@@ -1,67 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Novel 1</title>
+  <meta charset="UTF-8">
+  <title>seed</title>
   <style>
-    body{font-size:18px;}
-    /* CSS for the side menu */
-    #menu {
+    #novel-menu {
       position: fixed;
       top: 0;
       left: 0;
+      width: 200px;
       padding: 10px;
-      background-color: #f0f0f0;
     }
 
-    #menu a {
-      display: block;
-      margin-bottom: 5px;
-      text-decoration: none;
-      color: #000;
+    #novel-content {
+      margin-left: 220px;
+      padding: 10px;
     }
   </style>
 </head>
 <body>
-  <!-- Side menu -->
-  <div id="menu">
-    <a href="#text1">Text 1</a>
-    <a href="#text2">Text 2</a>
-    <a href="#text3">Text 3</a>
-    <!-- Add more anchor links for each text file -->
+  <div id="novel-menu">
+    <h2>Novel Menu</h2>
+    <ul id="novel-list"></ul>
   </div>
-
-  <!-- Novel content -->
   <div id="novel-content"></div>
 
   <script>
-    // Function to fetch and display the text files
     function fetchTextFiles() {
+      var novelList = document.getElementById("novel-list");
       var novelContent = document.getElementById("novel-content");
 
-      // Fetch the JSON file containing the list of file names
-      fetch("files.json")
+      // Fetch the list of text files
+      fetch("https://raw.githubusercontent.com/pinktit/buried-seed/main/files.json")
         .then(function(response) {
           return response.json();
         })
         .then(function(data) {
-          // Get the list of file names from the JSON data
+          // Get the list of file names
           var fileNames = data.files;
 
           // Loop through the file names
           fileNames.forEach(function(fileName) {
-            // Create an anchor element with the file name as the ID
-            var anchor = document.createElement("a");
-            anchor.id = fileName.replace(".txt", "");
-            anchor.style.display = "block";
-            novelContent.appendChild(anchor);
+            var listItem = document.createElement("li");
+            var link = document.createElement("a");
+            link.textContent = fileName.replace(".txt", "");
+            link.href = "#" + fileName.replace(".txt", "");
+            listItem.appendChild(link);
+            novelList.appendChild(listItem);
 
             // Fetch each text file
-            fetch(fileName)
+            fetch("https://raw.githubusercontent.com/pinktit/buried-seed/main/" + fileName)
               .then(function(response) {
                 return response.text();
               })
               .then(function(fileContent) {
-                // Create a <p> element and append the text content
+                var anchor = document.createElement("a");
+                anchor.id = fileName.replace(".txt", "");
+                novelContent.appendChild(anchor);
+
                 var paragraph = document.createElement("p");
                 paragraph.textContent = fileContent;
                 anchor.appendChild(paragraph);
@@ -76,7 +72,6 @@
         });
     }
 
-    // Call the fetchTextFiles function to fetch and display the text files
     fetchTextFiles();
   </script>
 </body>
