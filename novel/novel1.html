@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>seed</title>
+  <title>Novel 1</title>
   <style>
     #novel-menu {
       position: fixed;
@@ -58,9 +58,16 @@
                 anchor.id = fileName.replace(".txt", "");
                 novelContent.appendChild(anchor);
 
-                var paragraph = document.createElement("p");
-                paragraph.textContent = fileContent;
-                anchor.appendChild(paragraph);
+                var paragraphs = fileContent.split("\n");
+                paragraphs.forEach(function(paragraphText) {
+                  var paragraph = document.createElement("p");
+                  paragraph.textContent = paragraphText;
+                  anchor.appendChild(paragraph);
+
+                  // Insert line break after each paragraph
+                  var lineBreak = document.createElement("br");
+                  anchor.appendChild(lineBreak);
+                });
               })
               .catch(function(error) {
                 console.log("Error fetching " + fileName + ": " + error);
