@@ -36,34 +36,35 @@
           return response.json();
         })
         .then(function(data) {
-          // Get the list of file names and sort them alphabetically
-          var fileNames = data.files.sort();
+          // Get the list of file names
+          var fileNames = data.files;
 
-          // Loop through the sorted file names
+          // Create an object to store the text file content
+          var textFileContent = {};
+
+          // Loop through the file names
           fileNames.forEach(function(fileName) {
-            var listItem = document.createElement("li");
-            var link = document.createElement("a");
-            link.textContent = fileName.replace(".txt", "");
-            link.href = "#" + fileName.replace(".txt", "");
-            listItem.appendChild(link);
-            novelList.appendChild(listItem);
-
             // Fetch each text file
             fetch("https://raw.githubusercontent.com/pinktit/buried-seed/main/" + fileName)
               .then(function(response) {
                 return response.text();
               })
               .then(function(fileContent) {
-                var anchor = document.createElement("a");
-                anchor.id = fileName.replace(".txt", "");
-                novelContent.appendChild(anchor);
+                // Store the text file content in the object using the file name as the key
+                textFileContent[fileName] = fileContent;
 
-                var paragraphs = fileContent.split("\n");
-                paragraphs.forEach(function(paragraphText) {
-                  var paragraph = document.createElement("p");
-                  paragraph.textContent = paragraphText;
-                  anchor.appendChild(paragraph);
-                });
+                // Check if all files have been fetched
+                if (Object.keys(textFileContent).length === fileNames.length) {
+                  // Sort the file names by their ID
+                  fileNames.sort(function(a, b) {
+                    var idA = parseInt(a.replace(/[^0-9]/g, ""), 10);
+                    var idB = parseInt(b.replace(/[^0-9]/g, ""), 10);
+                    return idA - idB;
+                  });
+
+                  // Render the navigation menu and text content
+                  renderNovelContent(fileNames, textFileContent);
+                }
               })
               .catch(function(error) {
                 console.log("Error fetching " + fileName + ": " + error);
@@ -73,6 +74,32 @@
         .catch(function(error) {
           console.log("Error fetching file names: " + error);
         });
+    }
+
+    function renderNovelContent(fileNames, textFileContent) {
+      var novelList = document.getElementById("novel-list");
+      var novelContent = document.getElementById("novel-content");
+
+      // Loop through the sorted file names
+      fileNames.forEach(function(fileName) {
+        var listItem = document.createElement("li");
+        var link = document.createElement("a");
+        link.textContent = fileName.replace(".txt", "");
+        link.href = "#" + fileName.replace(".txt", "");
+        listItem.appendChild(link);
+        novelList.appendChild(listItem);
+
+        var anchor = document.createElement("a");
+        anchor.id = fileName.replace(".txt", "");
+        novelContent.appendChild(anchor);
+
+        var paragraphs = textFileContent[fileName].split("\n");
+        paragraphs.forEach(function(paragraphText) {
+          var paragraph = document.createElement("p");
+          paragraph.textContent = paragraphText;
+          anchor.appendChild(paragraph);
+        });
+      });
     }
 
     fetchTextFiles();
