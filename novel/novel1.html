@@ -36,10 +36,10 @@
           return response.json();
         })
         .then(function(data) {
-          // Get the list of file names and reverse the order
-          var fileNames = data.files.reverse();
+          // Get the list of file names
+          var fileNames = data.files;
 
-          // Loop through the file names
+          // Loop through the file names in the correct order
           fileNames.forEach(function(fileName) {
             var listItem = document.createElement("li");
             var link = document.createElement("a");
