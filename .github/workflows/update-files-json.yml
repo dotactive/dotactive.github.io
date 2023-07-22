@@ -6,28 +6,28 @@ on:
       - main
 
 jobs:
-  update-files-json:
+  update_files_json:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '14'
 
-      - name: Check if pinktit.github.io directory exists
-        run: ls pinktit.github.io
+      - name: Install npm dependencies
+        run: npm ci
 
-      - name: Change working directory to repository root
-        run: cd pinktit.github.io
+      - name: Generate files.json
+        run: node scripts/update-files-json.js
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build and update files.json
-        run: npm run update-files-json
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          REPO_URL: "https://github.com/pinktit/buried-seed.git"
+      - name: Commit and push changes
+        run: |
+          git config user.name "Your Name"
+          git config user.email "your.email@example.com"
+          git add files.json
+          git commit -m "Update files.json"
+          git push
