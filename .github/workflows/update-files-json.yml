@@ -6,20 +6,20 @@ on:
       - main
 
 jobs:
-  update-files-json:
+  update_files_json:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
+      - name: Checkout pinktit.github.io code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Clone buried-seed repository
+        run: git clone https://github.com/pinktit/buried-seed.git
 
       - name: Generate files.json
         run: node scripts/update-files-json.js
