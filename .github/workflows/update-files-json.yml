@@ -22,16 +22,7 @@ jobs:
         run: npm install
 
       - name: Fetch text files from 'pinktit/buried-seed'
-        run: |
-          mkdir -p novel
-          cd novel
-          git init
-          git config user.name "Your Name"
-          git config user.email "youremail@example.com"
-          git remote add origin https://github.com/pinktit/buried-seed.git
-          git fetch --depth=1 origin main
-          git checkout --no-guess main
-          cd ..
+        run: git clone https://github.com/pinktit/buried-seed.git buried-seed
 
       - name: Generate files.json
         run: |
