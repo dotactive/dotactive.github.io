@@ -19,12 +19,14 @@ jobs:
           node-version: '14'
 
       - name: Install npm dependencies
+        working-directory: ./pinktit.github.io  # Set the working directory to pinktit.github.io
         run: npm ci
 
       - name: Generate files.json
-        run: node scripts/update-files-json.js
+        run: node ./pinktit.github.io/scripts/update-files-json.js
 
       - name: Commit and push changes
+        working-directory: ./pinktit.github.io  # Set the working directory to pinktit.github.io
         run: |
           git config user.name "Your Name"
           git config user.email "your.email@example.com"
