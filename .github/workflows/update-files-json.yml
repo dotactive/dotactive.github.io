@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Check if pinktit.github.io directory exists
+        run: ls pinktit.github.io
+
       - name: Change working directory to repository root
         run: cd pinktit.github.io
 
