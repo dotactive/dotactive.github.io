@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Novel 1</title>
+  <style>
+    #novel-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      padding: 10px;
+    }
+
+    #novel-content {
+      margin-left: 220px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="novel-menu">
+      <h2>Novel Menu</h2>
+      <ul id="novel-list">
+        <li v-for="fileName in files" :key="fileName">
+          <a :href="'#' + fileName">{{ fileName.replace('.txt', '') }}</a>
+        </li>
+      </ul>
+    </div>
+    <div id="novel-content">
+      <div v-for="fileName in files" :key="fileName">
+        <a :id="fileName.replace('.txt', '')"></a>
+        <p v-for="paragraph in paragraphs[fileName]" :key="paragraph">{{ paragraph }}</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="../scripts/novel.js"></script>
+</body>
+</html>
