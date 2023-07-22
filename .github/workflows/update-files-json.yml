@@ -33,5 +33,5 @@ jobs:
           git commit -m "Update files.json"
           git push https://github.com/pinktit/pinktit.github.io.git HEAD:main
         env:
-          GH_TOKEN: ${{ secrets.PAT }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
