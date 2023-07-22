@@ -31,4 +31,7 @@ jobs:
           git config --global user.email "yourname@example.com"
           git add files.json
           git commit -m "Update files.json"
-          git push
+          git push https://github.com/pinktit/pinktit.github.io.git HEAD:main
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+
