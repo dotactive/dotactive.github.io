@@ -6,32 +6,30 @@ on:
       - main
 
 jobs:
-  update-files-json:
+  update_files_json:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the buried-seed repository
+      - name: Checkout repository
         uses: actions/checkout@v2
         with:
           repository: pinktit/buried-seed
-
-      - name: List files
+          
+      - name: List text files
         id: list-files
         run: |
-          echo "{\"files\": [" > files.json
-          cd buried-seed
-          ls *.txt | while read FILENAME; do
-            echo "\"$FILENAME\"," >> ../files.json
-          done
-          cd ..
+          ls -d ./*.txt | sed -e "s/^.\///" > files.txt
 
-      - name: Remove trailing comma from files.json
-        run: sed -i '$s/,$//' files.json
-
-      - name: Commit files.json
+      - name: Update files.json
         run: |
+          echo "{\"files\": [" > files.json
+          cat files.txt | while read filename; do
+            echo "\"$filename\"," >> files.json
+          done
+          sed -i '$ s/,$//' files.json
+          echo "]}" >> files.json
           git config --global user.name "Your Name"
-          git config --global user.email "yourname@example.com"
+          git config --global user.email "your-email@example.com"
           git add files.json
-          git commit -m "Update files.json"
-          git push
+          git commit -m "Update files.json" --quiet
+          git push origin main
