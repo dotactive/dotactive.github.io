@@ -18,7 +18,7 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build and update files.json
         run: npm run update-files-json
