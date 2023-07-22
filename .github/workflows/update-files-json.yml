@@ -26,7 +26,7 @@ jobs:
 
       - name: Generate files.json
         run: |
-          node generate-files-json.js
+          node scripts/generate-files-json.js
 
       - name: Commit and push changes
         run: |
