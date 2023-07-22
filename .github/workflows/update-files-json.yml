@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the code
+      - name: Checkout pinktit.github.io code
         uses: actions/checkout@v2
 
       - name: Install Node.js
@@ -18,16 +18,13 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install npm dependencies
-        working-directory: pinktit.github.io  # Set the working directory to pinktit.github.io
-        run: npm ci
+      - name: Clone buried-seed repository
+        run: git clone https://github.com/pinktit/buried-seed.git
 
       - name: Generate files.json
-        working-directory: pinktit.github.io  # Set the working directory to pinktit.github.io
-        run: node ./scripts/update-files-json.js
+        run: node scripts/update-files-json.js
 
       - name: Commit and push changes
-        working-directory: pinktit.github.io  # Set the working directory to pinktit.github.io
         run: |
           git config user.name "Your Name"
           git config user.email "your.email@example.com"
