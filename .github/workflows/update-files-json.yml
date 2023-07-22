@@ -8,30 +8,20 @@ on:
 jobs:
   update-files-json:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: List files from buried-seed
-        id: list-files
-        run: |
-          echo "{\"files\": [" > files.json
-          curl -s "https://api.github.com/repos/pinktit/buried-seed/contents/" | jq -r '.[] | select(.name | endswith(".txt")) | .name' | while read FILENAME; do
-            echo "\"$FILENAME\"," >> files.json
-          done
-          echo "]}" >> files.json
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-      - name: Remove trailing comma from files.json
-        run: sed -i '$s/,$//' files.json
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Commit files.json
-        run: |
-          git config --global user.name "Your Name"
-          git config --global user.email "yourname@example.com"
-          git add files.json
-          git commit -m "Update files.json"
-          git push https://github.com/pinktit/pinktit.github.io.git HEAD:main
+      - name: Build and update files.json
+        run: npm run update-files-json
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
+          REPO_URL: "https://github.com/pinktit/buried-seed.git"
