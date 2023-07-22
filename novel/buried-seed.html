@@ -20,6 +20,16 @@
 </head>
 <body>
   <div id="app">
+
+    <!-- Add the switch for converting text -->
+        <!-- <div id="header">
+            <label>Convert Text:</label>
+            <input type="checkbox" v-model="isTraditional" @change="convertText" />
+            <span v-if="isTraditional">Traditional Chinese</span>
+            <span v-else>Simplified Chinese</span>
+          </div>
+        </div> -->
+
     <div id="novel-menu">
       <h2>Novel Menu</h2>
       <ul id="novel-list">
@@ -35,8 +45,10 @@
       </div>
     </div>
   </div>
+  <!-- Add this script tag to load the opencc-js library -->
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/opencc-js"></script>
   <script src="../scripts/novel.js"></script>
 </body>
 </html>
