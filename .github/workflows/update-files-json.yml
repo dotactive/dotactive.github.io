@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Change working directory to repository root
+        run: cd pinktit.github.io
+
       - name: Install dependencies
         run: npm install
 
