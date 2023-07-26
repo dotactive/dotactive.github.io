@@ -43,24 +43,9 @@ const app = Vue.createApp({
             console.log('Error fetching file names: ' + error);
           });
       },
-      convertToTraditional(text) {
-        if (this.toTraditional) {
-          return OpenCC.simplifiedToTaiwan(text);
-        } else {
-          return text;
-        }
-      },
+
   
-      // Updated method to get converted paragraphs
-      getConvertedParagraphs(fileName) {
-        if (this.isTraditional && this.converter) {
-          // Convert to Traditional Chinese using the initialized converter
-          return this.paragraphs[fileName].map(paragraph => this.converter.convertSync(paragraph));
-        } else {
-          // Return original paragraphs
-          return this.paragraphs[fileName];
-        }
-      }
+
     }
   });
   
