@@ -1,12 +1,3 @@
-#novel-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;
-    padding: 10px;
-  }
-
-  #novel-content {
-    margin-left: 220px;
-    padding: 10px;
-  }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

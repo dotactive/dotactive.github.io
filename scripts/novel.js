@@ -63,8 +63,5 @@ myapp.component('novel-viewer', {
                 console.log('Error fetching file names: ' + error);
               });
           },
-    
-      
-    
         }
   })
