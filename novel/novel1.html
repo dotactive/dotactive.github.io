@@ -17,21 +17,8 @@
 
   <!-- Use the production build of Vue -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <script type="module" >
+  <script type="module" src="../scripts/novelViewer.vue"></script>
 
-import { createApp } from 'https://unpkg.com/vue@3/dist/vue.global.prod.js';
-import NovelViewer from '../scripts/novelViewer.vue';
-
-
-const app = createApp({
-  data() {
-    return {};
-  }
-});
-
-app.component('novel-viewer', NovelViewer);
-app.mount('#app');
-  </script>
 
 </body>
 </html>

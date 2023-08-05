@@ -1,6 +1,4 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.global.prod.js';
-import NovelViewer from './novelViewer.vue';
-
 
 const app = createApp({
   data() {
@@ -8,6 +6,11 @@ const app = createApp({
   }
 });
 
-app.component('novel-viewer', NovelViewer);
-app.mount('#app');
+app.component('novel-viewer', {
+  template: `
+    <!-- The template content is already in novelViewer.vue -->
+  `,
+  // Other component options here
+});
 
+app.mount('#app');
