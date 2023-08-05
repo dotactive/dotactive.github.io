@@ -1,5 +1,5 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.global.prod.js';
-import NovelViewer from './novel.js';
+import NovelViewer from './novelViewer.vue';
 
 const app = createApp({
   mounted() {
