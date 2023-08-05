@@ -1,13 +1,17 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.global.prod.js';
-import NovelViewer from './novelViewer.vue';
+import NovelViewer from './novel.js';
 
 const app = createApp({
-  data() {
-    return {};
+  mounted() {
+    this.fetchTextFiles();
   },
-  components: {
-    NovelViewer
+  methods: {
+    fetchTextFiles() {
+      // Fetch text files and process them here
+    }
   }
 });
 
+app.component('novel-viewer', NovelViewer);
 app.mount('#app');
+
