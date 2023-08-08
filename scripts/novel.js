@@ -15,7 +15,7 @@ myapp.component('novel-viewer', {
         </li>
       </ul>
     </div>
-    <div id="novel-content">
+    <div id="novel-content"  class="container mx-auto">
       <div v-for="fileName in files" :key="fileName">
         <a :id="fileName.replace('.txt', '')"></a>
         <p v-for="paragraph in paragraphs[fileName]" :key="paragraph" >{{ paragraph }}</p>

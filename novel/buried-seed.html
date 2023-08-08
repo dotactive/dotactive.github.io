@@ -2,40 +2,22 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Novel 1</title>
-  <link rel="stylesheet" href="../css/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../dist/output.css" rel="stylesheet">
+  <title>被活埋的种子</title>
 </head>
 <body>
   <div id="app">
-
-    <!-- Add the switch for converting text -->
-        <!-- <div id="header">
-            <label>Convert Text:</label>
-            <input type="checkbox" v-model="isTraditional" @change="convertText" />
-            <span v-if="isTraditional">Traditional Chinese</span>
-            <span v-else>Simplified Chinese</span>
-      </div>
-        </div> -->
-
-    <div id="novel-menu">
-      <h2>Novel Menu</h2>
-      <ul id="novel-list">
-        <li v-for="fileName in files" :key="fileName">
-          <a :href="'#' + fileName.replace('.txt', '')">{{ fileName.replace('.txt', '') }}</a>
-        </li>
-      </ul>
-    </div>
-    <div id="novel-content">
-      <div v-for="fileName in files" :key="fileName">
-        <a :id="fileName.replace('.txt', '')"></a>
-        <p v-for="paragraph in paragraphs[fileName]" :key="paragraph" >{{ paragraph }}</p>
-      </div>
-    </div>
+    <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/buried-seed/main/'"></novel-viewer>
   </div>
-  <!-- Add this script tag to load the opencc-js library -->
 
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.js"></script> 
-  <script src="../scripts/novel1.js"></script>
+  <!-- Use the production build of Vue -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/novel.js"></script>
+      <!-- Mount App -->
+      <script>
+        const mountedApp = myapp.mount('#app')
+      </script>
 </body>
 </html>
