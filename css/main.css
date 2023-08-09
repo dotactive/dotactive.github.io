@@ -1,0 +1,4 @@
+.novel-content.container{max-width: 800px;}
+.novel-content{line-height: 2;}
+.novel-content p{margin-top: 30px;}
+.novel-content>div>a+p{margin-top: 100px;    font-size: 24px;    font-weight: bold;}
