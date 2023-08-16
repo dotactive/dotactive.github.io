@@ -5,6 +5,10 @@ const myapp = Vue.createApp({
         }
     },
     methods: {
+        test(){
+            console.log('work');
+        },
+    
         updateFontSize(size) {
             console.log('size:'+size);
             if (size === 'small') {

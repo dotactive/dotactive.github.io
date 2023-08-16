@@ -9,7 +9,8 @@
 </head>
 <body>
   <div id="app">
-    <topbar title ="被活埋的种子"></topbar>
+   
+    <topbar title ="被活埋的种子" @select-font-size="updateFontSize" ></topbar>
     <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/buried-seed/main/'"></novel-viewer>
   </div>
 

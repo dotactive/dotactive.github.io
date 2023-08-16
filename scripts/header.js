@@ -3,10 +3,10 @@ myapp.component('topbar', {
         title: String
       },
     template: /*html*/ `
-    <header class="bg-blue-500 p-4">
+    <header class="p-4">
     <h1 class="text-white text-2xl">{{ title }}</h1>
     <div class="mt-2">
-      <select class="mr-2" @change="updateFontSize">
+      <select class="mr-2" @change="selectFontSize">
         <option value="small">Small</option>
         <option value="medium">Medium</option>
         <option value="large">Large</option>
@@ -16,8 +16,9 @@ myapp.component('topbar', {
     `,
 
     methods: {
-        updateFontSize(event) {
-            this.$emit('updateFontSize', event.target.value); // Emit the event here
+
+        selectFontSize(event) {
+            this.$emit('select-font-size', event.target.value); // Emit the event here
         }
     }
   });
