@@ -8,6 +8,7 @@ myapp.component('novel-viewer', {
     },
     data() {
       return {
+        showMenu: false,
         files: [],
         paragraphs: {}
         
@@ -23,7 +24,7 @@ myapp.component('novel-viewer', {
         </li>
       </ul>
     </div>
-    <div id="novel-content" :class="[fontsize, 'container', 'mx-auto', 'novel-content']">
+    <div id="novel-content" class="container mx-auto novel-content">
       <div v-for="fileName in files" :key="fileName">
         <a :id="fileName.replace('.txt', '')"></a>
         <p v-for="paragraph in paragraphs[fileName]" :key="paragraph" >{{ paragraph }}</p>
@@ -65,16 +66,6 @@ myapp.component('novel-viewer', {
               .catch(error => {
                 console.log('Error fetching file names: ' + error);
               });
-          },
-          updateFontSize(size) {
-            console.log('novelsize:'+size);
-            if (size === 'small') {
-                this.fontSize = 'text-sm';
-            } else if (size === 'medium') {
-                this.fontSize = 'text-base';
-            } else if (size === 'large') {
-                this.fontSize = 'text-lg';
-            }
-        }
+          }
         }
   })

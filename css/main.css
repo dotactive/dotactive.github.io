@@ -4,3 +4,16 @@ header{background-image: linear-gradient(#807063, #736255); color:#fff;}
 .novel-content{line-height: 2;}
 .novel-content p{margin-top: 15px;}
 .novel-content>div>a+p{margin-top: 100px;  font-weight: bold;}
+#novel-menu {
+    transition: transform 0.3s ease-out;
+    transform: translateX(-100%);
+    position: fixed;
+    height: 100%;
+    top: 0;
+    overflow: scroll;
+    padding: 20px;
+    background: #fff;
+  }
+.menuActive  #novel-menu {
+    transform: translateX(0);
+  }
