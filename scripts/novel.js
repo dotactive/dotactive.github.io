@@ -3,7 +3,15 @@ myapp.component('novel-viewer', {
         novelurl:{
             type:String,
             required:true
-        } 
+        },
+        fontsize: String 
+    },
+    data() {
+      return {
+        files: [],
+        paragraphs: {}
+        
+      };
     },
     template: 
       /*html*/ 
@@ -15,7 +23,7 @@ myapp.component('novel-viewer', {
         </li>
       </ul>
     </div>
-    <div id="novel-content" :class="[fontSize, 'container', 'mx-auto', 'novel-content']">
+    <div id="novel-content" :class="[fontsize, 'container', 'mx-auto', 'novel-content']">
       <div v-for="fileName in files" :key="fileName">
         <a :id="fileName.replace('.txt', '')"></a>
         <p v-for="paragraph in paragraphs[fileName]" :key="paragraph" >{{ paragraph }}</p>
@@ -23,13 +31,7 @@ myapp.component('novel-viewer', {
     </div>
   </div>
       `,
-      data() {
-        return {
-          files: [],
-          paragraphs: {},
-          fontSize: 'text-base' // Initial font size class
-        };
-      },
+
         mounted() {
           this.fetchTextFiles();
         },
