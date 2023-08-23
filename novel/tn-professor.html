@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../dist/output.css" rel="stylesheet">
+  <link href="../css/main.css" rel="stylesheet">
+  <title>屠牛老师</title>
+</head>
+<body>
+  <div id="app">
+   
+    <topbar title ="屠牛老师" @select-font-size="updateFontSize" ></topbar>
+    <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/tn-professor/main/'"  :fontsize ="fontSize"></novel-viewer>
+  </div>
+
+  <!-- Use the production build of Vue -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/header.js"></script>
+  <script src="../scripts/novel.js"></script>
+
+      <!-- Mount App -->
+      <script>
+        const mountedApp = myapp.mount('#app')
+      </script>
+</body>
+</html>
