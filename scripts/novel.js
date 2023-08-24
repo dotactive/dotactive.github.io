@@ -16,14 +16,15 @@ myapp.component('novel-viewer', {
     },
     template: 
       /*html*/ 
-      `<div id="novel-menu">
-      <h2>Novel Menu</h2>
+      `<div id="novel-menu" class="animation-mode">
+      <h2 class="hidden">Novel Menu</h2>
       <ul id="novel-list">
         <li v-for="fileName in files" :key="fileName">
-          <a :href="'#' + fileName.replace('.txt', '')">{{ fileName.replace('.txt', '') }}</a>
+          <a class="animation-mode" :href="'#' + fileName.replace('.txt', '')">{{ fileName.replace('.txt', '') }}</a>
         </li>
       </ul>
     </div>
+    <div class="menu-mask" @click="hideMenu"></div>
     <div id="novel-content" class="container mx-auto novel-content">
       <div v-for="fileName in files" :key="fileName">
         <a :id="fileName.replace('.txt', '')"></a>
@@ -66,6 +67,9 @@ myapp.component('novel-viewer', {
               .catch(error => {
                 console.log('Error fetching file names: ' + error);
               });
+          },
+          hideMenu(){
+            this.$emit('hidemenu'); 
           }
         }
   })
