@@ -20,14 +20,14 @@ myapp.component('novel-viewer', {
       <h2 class="hidden">Novel Menu</h2>
       <ul id="novel-list">
         <li v-for="fileName in files" :key="fileName">
-          <a class="animation-mode" :href="'#' + fileName.replace('.txt', '')">{{ fileName.replace('.txt', '') }}</a>
+          <a class="animation-mode" @click="scrollToSection(fileName.replace('.txt', ''))">{{ fileName.replace('.txt', '') }}</a>
         </li>
       </ul>
     </div>
     <div class="menu-mask" @click="hideMenu"></div>
     <div id="novel-content" class="container mx-auto novel-content">
       <div v-for="fileName in files" :key="fileName">
-        <a :id="fileName.replace('.txt', '')"></a>
+        <a :id="fileName.replace('.txt', '')" ></a>
         <p v-for="paragraph in paragraphs[fileName]" :key="paragraph" >{{ paragraph }}</p>
       </div>
     </div>
@@ -70,6 +70,12 @@ myapp.component('novel-viewer', {
           },
           hideMenu(){
             this.$emit('hidemenu'); 
+          },
+          scrollToSection(sectionId) {
+            const sectionElement = document.getElementById(sectionId);
+            if (sectionElement) {
+              sectionElement.scrollIntoView({ behavior: 'smooth' });
+            }
           }
         }
   })
