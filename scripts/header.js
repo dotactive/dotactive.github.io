@@ -14,20 +14,21 @@ myapp.component('topbar', {
     </button>
     <h1 class="text-white text-2xl">{{ title }}</h1>
     <div class="mt-2">
-      <select class="mr-2" @change="selectFontSize">
-        <option value="small">Small</option>
-        <option value="medium">Medium</option>
-        <option value="large">Large</option>
-      </select>
+    <input    type="range"    min="1"    max="4"    v-model="fontSizeValue"   class="slider"    @input="updateFontSize"  >
     </div>
     </div>
   </header>
     `,
-
+    data() {
+      return {
+        fontSizeValue: 2 // Default font size is 'medium'
+      };
+    },
     methods: {
 
-        selectFontSize(event) {
-            this.$emit('select-font-size', event.target.value); // Emit the event here
+      updateFontSize() {
+          console.log('fontSizeValue'+this.fontSizeValue);
+            this.$emit('select-font-size', this.fontSizeValue); // Emit the event here
         },
         showMenu(){
           this.$emit('showmenu'); 

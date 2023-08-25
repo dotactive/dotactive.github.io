@@ -9,11 +9,13 @@ const myapp = Vue.createApp({
 
         updateFontSize(size) {
             console.log('size:'+size);
-            if (size === 'small') {
+            if (size == 1) {
                 this.fontSize = 'text-sm';
-            } else if (size === 'medium') {
+            } else if (size == 2) {
                 this.fontSize = 'text-base';
-            } else if (size === 'large') {
+            } else if (size == 3) {
+                this.fontSize = 'text-lg';
+            } else if (size == 4) {
                 this.fontSize = 'text-xl';
             }
         },
