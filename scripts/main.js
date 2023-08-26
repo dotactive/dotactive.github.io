@@ -2,7 +2,8 @@ const myapp = Vue.createApp({
     data(){
         return{
             fontSize: 'text-base', // Default font size is 'medium'
-            showmenu: ''
+            showmenu: '',
+            nightmode:''
         }
     },
     methods: {
@@ -24,7 +25,14 @@ const myapp = Vue.createApp({
         },
         hidemenufunction(){
             this.showmenu = '';
+        },
+        dayNightMode(night){
+            if(night){
+                this.nightmode = 'nightmode'
+            }
+            else{
+                this.nightmode = ''
+            }
         }
-
     }
 });
