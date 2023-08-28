@@ -14,7 +14,8 @@ header{background-image: linear-gradient(#807063, #736255); color:#fff; position
   -ms-transform: translateX(0);
   -o-transform: translateX(0);
   transform: translateX(0);
-  opacity: 1;
+  visibility: visible;
+
 }    
 .novel-body{background-color: #fbf7ed; color:#635752;}
 .novel-body.nightmode{background-color: #333; color:#fff;}
@@ -80,12 +81,20 @@ header{background-image: linear-gradient(#807063, #736255); color:#fff; position
 
       cursor: pointer;
     }
-.setting-top{    position: absolute;  right: 30px;  background: #f1e8cf;  padding: 20px;  top: 90px; opacity: 0;  color:#807063; width: 300px;
-  -webkit-transform: translateY(-100px) translateX(100px) scale(10%);
-  -moz-transform:  translateY(-100px) translateX(100px) scale(10%);
-  -ms-transform:  translateY(-100px) translateX(100px) scale(10%);
-  -o-transform:  translateY(-100px) translateX(100px) scale(10%);
-  transform:  translateY(-100px) translateX(100px) scale(10%);
+.setting-top{    position: absolute;  right: 15px;  background: #fff;  padding: 20px;  top: 90px; opacity: 0.8;  color:#807063; width: 300px; visibility:hidden; border: #ccc solid 1px;
+  -webkit-transform: translateY(-80px) translateX(120px) scale(10%);
+  -moz-transform:  translateY(-80px) translateX(120px) scale(10%);
+  -ms-transform:  translateY(-80px) translateX(120px) scale(10%);
+  -o-transform:  translateY(-80px) translateX(120px) scale(10%);
+  transform:  translateY(-80px) translateX(120px) scale(10%);
 }
 .setting-top  .title{font-weight:bold;}
+.menu-btn, .setting-btn{font-size:24px; width:50px;}
+.menu-btn:hover .fa-bars:before{content: "\f550";}
+
+.menu-close{position: absolute;  left:30px; top:25px;     font-size: 24px;}
+
+@keyframes spin {  0% { transform: rotate(0deg); }  100% { transform: rotate(360deg); }}
+.animate-spin {  animation: spin 2s linear infinite;}
+
     

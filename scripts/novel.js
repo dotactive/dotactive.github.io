@@ -18,14 +18,15 @@ myapp.component('novel-viewer', {
       /*html*/ 
       `<div id="novel-menu" class="animation-mode">
       <h2 class="hidden">Novel Menu</h2>
-      <ul id="novel-list">
+      <button  @click="hideMenu" class="menu-close"><i class="fa fa-solid fa-times transform hover:rotate-12"></i></button>
+      <ul id="novel-list"  class="mt-12">
         <li v-for="fileName in files" :key="fileName">
           <a class="animation-mode" @click="scrollToSection(fileName.replace('.txt', ''))">{{ fileName.replace('.txt', '') }}</a>
         </li>
       </ul>
     </div>
     <div class="menu-mask" @click="hideMenu"></div>
-    <div id="novel-content" class="container mx-auto novel-content">
+    <div id="novel-content" class="container mx-auto novel-content p-10">
       <div v-for="fileName in files" :key="fileName">
         <a :id="fileName.replace('.txt', '')" ></a>
         <p v-for="paragraph in paragraphs[fileName]" :key="paragraph" >{{ paragraph }}</p>
