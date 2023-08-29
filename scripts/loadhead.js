@@ -5,4 +5,4 @@ fetch('./head.html')
     headElement.insertAdjacentHTML('beforeend', data);
   })
   .catch(error => console.error('Error loading head.html:', error));
-const mountedApp = myapp.mount('#app');
+
