@@ -3,7 +3,7 @@ myapp.component('topbar', {
         title: String
       },
     template: /*html*/ `
-    <header class="bg-gray-900 text-white p-4">
+    <header class="header bg-gray-900 text-white p-4 animation-mode"  :class="{ 'active-pos': showHeader }" ref="header">
     <div class="flex items-center justify-between">
     
     <!-- Hamburger Icon -->
@@ -33,6 +33,8 @@ myapp.component('topbar', {
     data() {
       return {
         fontSizeValue: 2, // Default font size is 'medium'
+        lastScrollPos: 0,
+        showHeader: true, // Initially show the header
         isSettingOpen: false,
         nightMode:false
       };
@@ -51,6 +53,28 @@ myapp.component('topbar', {
         daynight(){
           this.nightMode = !this.nightMode;
           this.$emit('day-night-mode', this.nightMode);
-        }
-    }
+        },
+        handleScroll() {
+          const currentScrollPos = window.scrollY;
+          const scrollingDown = currentScrollPos > this.lastScrollPos;
+    
+          if (scrollingDown) {
+            this.showHeader = false; // Hide the header
+          } else {
+            this.showHeader = true; // Show the header
+          }
+    
+          // Update the last scroll position
+          this.lastScrollPos = currentScrollPos;
+        },
+    },
+
+    mounted() {
+      // Attach scroll event listener
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    beforeDestroy() {
+      // Remove scroll event listener
+      window.removeEventListener('scroll', this.handleScroll);
+    },
   });
