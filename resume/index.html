@@ -12,13 +12,28 @@
   gtag('config', 'G-MKL3GYZWJD');
 </script>
 <link href="./dist/output.css" rel="stylesheet">
-<link href="./css/main.css" rel="stylesheet">
+<link href="./css/resume.css" rel="stylesheet">
 <title>Dotactive::Shize Liu's Resume</title>
     </head>
     <body>
-        <div class="fun-page">
-        <h1>dotactive</h1>
-        <h2 class="text-2xl font-bold text-center mt-8 animate-bounce">There are lots of fun stuff on this site.</h2>
-        </div>
+        <div id="app">
+
+            <animation :text="'Text 1'" :speed="5000" :size="20" :horizontal="500" :vertical="0"></animation>
+            <animation :text="'Text 2'" :speed="3000" :size="18" :horizontal="600" :vertical="10"></animation>
+            <animation :text="'Text 3'" :speed="7000" :size="24" :horizontal="400" :vertical="20"></animation>
+
+              
+            
+          </div>
+          <script src="https://kit.fontawesome.com/07f61069d8.js" crossorigin="anonymous"></script>
+          <!-- Use the production build of Vue -->
+          <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+          <script src="../scripts/main.js"></script>
+
+        
+              <!-- Mount App -->
+              <script>
+                const mountedApp = myapp.mount('#app')
+              </script>
     </body>
 </html>
