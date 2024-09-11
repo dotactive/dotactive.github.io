@@ -22,11 +22,11 @@ myapp.component('animation', {
       }
     },
     template: `
-      <div class="relative overflow-hidden" :style="containerStyle">
-        <p class="absolute whitespace-nowrap" :style="textStyle">
+
+        <p class="absolute whitespace-nowrap moving-text" :style="textStyle">
           {{ text }}
         </p>
-      </div>
+ 
     `,
     computed: {
       // Styles for the container div
