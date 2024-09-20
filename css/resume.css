@@ -6,6 +6,18 @@
       transform: translateX(100%);
     }
   }
+
+  :root {
+    --main-color: #FF9000;
+    --main-font: 'Open Sans', sans-serif;
+
+  }
+
   body{background: #333; color:#fff;}
+  .maincolor{color: var(--main-color); }
   #home{width: 100%;  position: relative; overflow: hidden;}
   #home .moving-text{color: rgba(255, 255, 255, 0.1);}
+  .logo{background-color: #4c4c4c; border: #6a6a6a solid  5px;   text-align: center;  border-radius: 50%;    width: 200px;
+    height: 200px;
+    margin: auto;}
+  .logo  h1{  font-family: "Outfit", sans-serif;  font-weight: 600;    margin-bottom: 0;    font-size: 36px;   color:#fff;   margin-top: 70px;}
