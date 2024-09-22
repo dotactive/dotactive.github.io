@@ -43,7 +43,8 @@ myapp.component('animation', {
         return {
           fontSize: `${this.size}px`, // Font size
           transform: `translateY(${this.vertical}px)`, // Vertical translation
-          animation: `move-left-right ${this.speed}ms linear infinite` // Animation speed
+          animation: `move-left-right ${this.speed}ms linear infinite`, // Animation speed
+          left:  `${this.horizontal}px`
         };
       }
     }

@@ -147,3 +147,8 @@
 
 
 }());
+
+$(document).ready(function(){
+	$('#home').css('height',window.innerHeight);
+	$('#home .logo').css('margin-top',window.innerHeight/2-100);
+});
