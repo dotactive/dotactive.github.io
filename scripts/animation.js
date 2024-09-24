@@ -40,11 +40,12 @@ myapp.component('animation', {
       },
       // Styles for the text div
       textStyle() {
+        const animationName = this.horizontal > 50 ? 'move-right-left' : 'move-left-right';
         return {
           fontSize: `${this.size}px`, // Font size
           transform: `translateY(${this.vertical}px)`, // Vertical translation
-          animation: `move-left-right ${this.speed}ms linear infinite`, // Animation speed
-          left:  `${this.horizontal}px`
+          animation: `${animationName} ${this.speed}ms linear infinite`, // Animation speed
+          '--initial-left':  `${this.horizontal}%`
         };
       }
     }

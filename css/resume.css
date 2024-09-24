@@ -8,9 +8,15 @@
   } */
 
   @keyframes move-left-right  {
-    from {left: 0px;}
-    to {left: 100%;}
+    0% { left: var(--initial-left); }
+    50% { left: 100%; }
+    100% { left: var(--initial-left); }
   }
+  @keyframes move-right-left {
+    0% { left: var(--initial-left); }
+    50% { left: 0%; }
+    100% { left: var(--initial-left); }
+}
 
   :root {
     --main-color: #FF9000;
@@ -21,7 +27,7 @@
   body{background: #333; color:#fff; font-family:var(--main-font);}
   .maincolor{color: var(--main-color); }
   .maincolorbg{background-color:var(--main-color);  color:#fff;}
-
+  .section-padding{padding:100px 0}
 
   #home{width: 100%;  position: relative; overflow: hidden;}
   #home p{margin:0; position: absolute; font-family: "Space Mono", Arial, serif;}
