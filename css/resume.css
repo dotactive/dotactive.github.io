@@ -59,3 +59,9 @@
   .copyright{float:left; padding:10px;}
   #footer .cont{float:right; padding:10px;}
   #footer .cont a, #footer .cont span{color:#fff;  margin-left:10px}
+  
+  
+
+  @media screen and (max-width: 768px) {
+    #resume .next{left: 27px;     bottom: -5px;}
+  }
