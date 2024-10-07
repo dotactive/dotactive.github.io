@@ -149,6 +149,22 @@
 }());
 
 $(document).ready(function(){
-	$('#home').css('height',window.innerHeight);
+	$('.screenheight').each(function(){
+		$(this).css('min-height',window.innerHeight);
+	});
+	// $('#home').css('min-height',window.innerHeight);
 	$('#home .logo').css('margin-top',window.innerHeight/2-100);
+
+	$('.next').click(function(){
+
+                    
+		$('html, body').stop().animate({
+			scrollTop: $(this).attr('href').offset().top
+		}, 1500,'easeInOutExpo');
+
+
+	});
+
+
+
 });
