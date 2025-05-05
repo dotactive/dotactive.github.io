@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MKL3GYZWJD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MKL3GYZWJD');
+</script>
+  <link href="../dist/output.css" rel="stylesheet">
+  <link href="../css/main.css" rel="stylesheet">
+  <title>Professor Tuniu</title>
+</head>
+<body>
+  <div id="app">
+   
+    <topbar title ="Professor Tuniu" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode"></topbar>
+    <div :class="[fontSize, showmenu, nightmode, 'novel-body']">
+      <novel-viewer :novelurl="'https://raw.githubusercontent.com/dotactive/professor-tuniu/main/'" @hidemenu="hidemenufunction"></novel-viewer>
+    </div>
+    
+  </div>
+  <script src="https://kit.fontawesome.com/07f61069d8.js" crossorigin="anonymous"></script>
+  <!-- Use the production build of Vue -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/header.js"></script>
+  <script src="../scripts/novel.js"></script>
+
+      <!-- Mount App -->
+      <script>
+        const mountedApp = myapp.mount('#app')
+      </script>
+</body>
+</html>
