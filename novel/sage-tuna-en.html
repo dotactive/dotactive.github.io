@@ -14,14 +14,14 @@
 </script>
   <link href="../dist/output.css" rel="stylesheet">
   <link href="../css/main.css" rel="stylesheet">
-  <title>Professor Tuniu</title>
+  <title>Sage Tuna</title>
 </head>
 <body>
   <div id="app">
    
-    <topbar title ="Professor Tuniu" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode"></topbar>
+    <topbar title ="Sage Tuna" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode"></topbar>
     <div :class="[fontSize, showmenu, nightmode, 'novel-body']">
-      <novel-viewer :novelurl="'https://raw.githubusercontent.com/dotactive/professor-tuniu/main/'" @hidemenu="hidemenufunction"></novel-viewer>
+      <novel-viewer :novelurl="'https://raw.githubusercontent.com/dotactive/sage-tuna/main/'" @hidemenu="hidemenufunction"></novel-viewer>
     </div>
     
   </div>
