@@ -18,6 +18,90 @@
     100% { left: var(--initial-left); }
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(-40px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(40px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
   :root {
     --main-color: #FF9000;
     --main-font: 'Nunito Sans', sans-serif;  
@@ -27,17 +111,51 @@
   html {    scroll-behavior: smooth;  }
   body{background: #333; color:#fff; font-family:var(--main-font);}
   .maincolor{color: var(--main-color); }
-  .maincolorbg{background-color:var(--main-color);  color:#fff;}
+  .maincolorbg{
+    background: linear-gradient(-45deg, var(--main-color), #FF7A00, var(--main-color), #FFB84D);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    color: #fff;
+  }
   .section-padding{padding:100px 0}
+  .screenheight{min-height: 100vh; display: flex; flex-direction: column; justify-content: center;}
 
   #home{width: 100%;  position: relative; overflow: hidden;}
   #home .moving-text{margin:0; position: absolute; font-family: "Space Mono", Arial, serif; color:#6a6a6a; cursor: pointer;}
   #home .next,  #about .next{bottom: 10%;}
+  #about{position: relative;}
   /* #home .moving-text{color: rgba(255, 255, 255, 0.25);} */
   .moving-text .skill-text{float: left; margin-right: 20px; font-size: 24px;}
   .moving-text .percent-num{font-size:18px; float:right; width:50px;  height:50px; }
-  .logo{background-color: #4c4c4c; border: #6a6a6a solid  5px; text-align: center;  border-radius: 50%; width: 200px; height: 200px; margin:auto; position: relative; z-index: 2;}
-  .logo  h1{  font-family: "Outfit", sans-serif;  font-weight: 600;    margin-bottom: 0;    font-size: 36px;   color:#fff;   margin-top: 70px;}
+  .logo{
+    background: linear-gradient(135deg, #4c4c4c 0%, #6a6a6a 100%); 
+    border: #6a6a6a solid 5px; 
+    text-align: center; 
+    border-radius: 50%; 
+    width: 200px; 
+    height: 200px; 
+    margin: auto; 
+    position: relative; 
+    z-index: 2;
+    animation: fadeInUp 1s ease-out, float 6s ease-in-out infinite;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .logo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  }
+  
+  .logo h1{  
+    font-family: "Outfit", sans-serif;  
+    font-weight: 600;    
+    margin-bottom: 0;    
+    font-size: 36px;   
+    color: #fff;   
+    margin-top: 70px;
+    animation: fadeInUp 1.2s ease-out 0.3s both;
+  }
 
   .fade-enter-active, .fade-leave-active {    transition: opacity 0.5s;  }
   .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {    opacity: 0;  }
@@ -52,15 +170,122 @@
   .circle-bg {    fill: none;    stroke: #ccc ;    stroke-width: 2; /* Thinner ring */  }
   .circle {    fill: none;    stroke-width: 2;  stroke-linecap: round;    stroke: var(--main-color);    transition: stroke-dasharray 0.5s;  }
   .percentage {    fill: #ccc;    font-size: 0.5em;    text-anchor: middle;  }
-  .next{position: absolute;  bottom: 0;  left: calc(50% - 15px);    width: 30px;    height: 30px;    border-radius: 50%;    background-color:#6a6a6a;    text-align: center;    color: #fff;}
-  .next:hover{ background-color:var(--main-color); color:#fff;}
-  .next  i{display: table-cell;    vertical-align: middle;    height: 30px;    width: 30px;    font-size: 18px;}
+  .next{
+    position: absolute;  
+    bottom: 0;  
+    left: calc(50% - 15px);    
+    width: 30px;    
+    height: 30px;    
+    border-radius: 50%;    
+    background-color: #6a6a6a;    
+    text-align: center;    
+    color: #fff;
+    animation: pulse 2s infinite;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  
+  .next:hover{ 
+    background-color: var(--main-color); 
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 144, 0, 0.3);
+    animation: none;
+  }
+  
+  .next i{
+    display: table-cell;    
+    vertical-align: middle;    
+    height: 30px;    
+    width: 30px;    
+    font-size: 18px;
+  }
   .gototop a:hover{color:var(--main-color);}
   .copyright{float:left; padding:10px;}
   #footer .cont{float:right; padding:10px;}
   #footer .cont a, #footer .cont span{color:#fff;  margin-left:10px}
   
   
+
+  /* Animation utility classes */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+  
+  .animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .timeline-item {
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-item:hover {
+    transform: translateX(10px);
+  }
+  
+  .timeline-item:nth-child(even):hover {
+    transform: translateX(-10px);
+  }
+  
+  .feature-left {
+    transition: all 0.3s ease;
+  }
+  
+  .feature-left:hover {
+    transform: translateY(-10px);
+  }
+  
+  .feature-left .icon {
+    transition: all 0.3s ease;
+  }
+  
+  .feature-left:hover .icon {
+    animation: float 2s ease-in-out infinite;
+    color: var(--main-color);
+  }
+  
+  .chart {
+    transition: all 0.3s ease;
+  }
+  
+  .chart:hover {
+    transform: scale(1.1);
+  }
+  
+  h2 {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--main-color), transparent);
+    transition: all 0.8s ease;
+    transform: translateX(-50%);
+  }
+  
+  h2:hover::after {
+    width: 100%;
+  }
+  
+  .info li {
+    transition: all 0.3s ease;
+    padding: 5px 0;
+  }
+  
+
+  .name {
+    animation: fadeInUp 1.5s ease-out 0.6s both;
+  }
 
   @media screen and (max-width: 768px) {
     #resume .next{left: 27px;     bottom: -5px;}
