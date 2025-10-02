@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(start:*)"
+      "Bash(start:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(dir node_modulesopencc-jsdistumd /b)"
     ],
     "deny": [],
     "ask": []

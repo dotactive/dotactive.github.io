@@ -4,13 +4,15 @@ myapp.component('novel-viewer', {
       type: String,
       required: true
     },
-    fontsize: String
+    fontsize: String,
+    isSimplified: Boolean
   },
   data() {
     return {
       showMenu: false,
       files: [],
       paragraphs: {},
+      originalParagraphs: {}, // Store original text
       coverImage: '' // Initialize cover image URL
     };
   },
@@ -67,6 +69,8 @@ myapp.component('novel-viewer', {
             // Ensure the order of paragraphs is the same as the 'files' list
             this.files.forEach(fileName => {
               this.paragraphs[fileName] = this.paragraphs[fileName].filter(paragraph => paragraph.trim() !== '');
+              // Store original text
+              this.originalParagraphs[fileName] = [...this.paragraphs[fileName]];
             });
           });
         })
@@ -95,6 +99,35 @@ myapp.component('novel-viewer', {
         .catch(error => {
           console.error('Error loading cover image:', error);
         });
+    },
+    convertText(text, toSimplified) {
+      // Use OpenCC for conversion
+      if (!text) return text;
+
+      try {
+        if (toSimplified) {
+          // Convert Traditional Chinese to Simplified Chinese
+          const converter = OpenCC.Converter({ from: 'tw', to: 'cn' });
+          return converter(text);
+        } else {
+          // Convert Simplified Chinese to Traditional Chinese
+          const converter = OpenCC.Converter({ from: 'cn', to: 'tw' });
+          return converter(text);
+        }
+      } catch (error) {
+        console.error('OpenCC conversion error:', error);
+        return text; // Return original text if conversion fails
+      }
+    }
+  },
+  watch: {
+    isSimplified(newVal) {
+      // Convert all text when mode changes
+      this.files.forEach(fileName => {
+        this.paragraphs[fileName] = this.originalParagraphs[fileName].map(paragraph =>
+          this.convertText(paragraph, newVal)
+        );
+      });
     }
   }
 })
