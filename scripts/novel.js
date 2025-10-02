@@ -4,7 +4,16 @@ myapp.component('novel-viewer', {
       type: String,
       required: true
     },
-    fontsize: String
+    fontsize: String,
+    lang: String
+  },
+  computed: {
+    actualNovelUrl() {
+      if (this.lang) {
+        return this.novelurl + this.lang + '/';
+      }
+      return this.novelurl;
+    }
   },
   data() {
     return {
@@ -44,16 +53,17 @@ myapp.component('novel-viewer', {
   mounted() {
     this.fetchTextFiles();
     this.loadCoverImage(); // Load the cover image
+    
   },
   methods: {
     fetchTextFiles() {
-      fetch(this.novelurl + 'files.json')
+      fetch(this.actualNovelUrl + 'files.json')
         .then(response => response.json())
         .then(data => {
           this.files = data.files;
           // Fetch each text file and store its content in the 'paragraphs' object
           const fetchPromises = this.files.map(fileName => {
-            return fetch(`${this.novelurl}${fileName}`)
+            return fetch(`${this.actualNovelUrl}${fileName}`)
               .then(response => response.text())
               .then(fileContent => {
                 this.paragraphs[fileName] = fileContent.split('\n');
@@ -85,7 +95,7 @@ myapp.component('novel-viewer', {
     },
     loadCoverImage() {
       // Load the cover image using the provided URL
-      const coverImageURL = `${this.novelurl}cover.jpg`;
+      const coverImageURL = `${this.actualNovelUrl}cover.jpg`;
       fetch(coverImageURL)
         .then(response => {
           if (response.ok) {
@@ -95,6 +105,18 @@ myapp.component('novel-viewer', {
         .catch(error => {
           console.error('Error loading cover image:', error);
         });
+    }
+  },
+  watch: {
+    lang() {
+      // Reload content when language changes
+      this.files = [];
+      this.paragraphs = {};
+      this.coverImage = '';
+      this.fetchTextFiles();
+      this.loadCoverImage();
+
+      console.log('lang'+this.lang);
     }
   }
 })

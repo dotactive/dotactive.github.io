@@ -17,10 +17,14 @@ myapp.component('topbar', {
     <i  v-else class="fa fa-regular fa-gear transform transition-transform duration-300 hover:rotate-180"></i>
     </button>
     <div  :class="['setting-top',  'animation-mode', { 'active-pos': isSettingOpen }]">
-    <div class="grid grid-cols-8 gap-2">
+    <div class="grid grid-cols-9 gap-2">
     <div class="title"><i class="fa fa-solid fa-font"></i></div>
     <div class="col-span-5"><input    type="range"    min="1"    max="4"    v-model="fontSizeValue"   class="slider"    @input="updateFontSize"  ></div>
     <div></div>
+    <div class="cn-switch"><button @click="toggleChinese" :title="lang === 'cn' ? '切换到繁体' : '切換到簡體'">
+    <span v-if="lang === 'cn'">简</span>
+    <span v-else>繁</span>
+    </button></div>
     <div class="day-night"><button @click="daynight">
     <i v-if="nightMode" class="fa fa-solid fa-sun"></i>
     <i v-else  class="fa fa-solid fa-moon"></i>
@@ -36,7 +40,8 @@ myapp.component('topbar', {
         lastScrollPos: 0,
         showHeader: true, // Initially show the header
         isSettingOpen: false,
-        nightMode:false
+        nightMode:false,
+        lang: 'cn' // Default to simplified Chinese
       };
     },
     methods: {
@@ -53,6 +58,10 @@ myapp.component('topbar', {
         daynight(){
           this.nightMode = !this.nightMode;
           this.$emit('day-night-mode', this.nightMode);
+        },
+        toggleChinese(){
+          this.lang = this.lang === 'cn' ? 'tw' : 'cn';
+          this.$emit('lang-change', this.lang);
         },
         handleScroll() {
           const currentScrollPos = window.scrollY;

@@ -3,7 +3,8 @@ const myapp = Vue.createApp({
         return{
             fontSize: 'text-base', // Default font size is 'medium'
             showmenu: '',
-            nightmode:''
+            nightmode:'',
+            lang: 'cn'
         }
     },
     methods: {
@@ -33,6 +34,9 @@ const myapp = Vue.createApp({
             else{
                 this.nightmode = ''
             }
+        },
+        langChange(lang){
+            this.lang = lang;
         }
     }
 });

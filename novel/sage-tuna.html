@@ -12,9 +12,9 @@
 <body>
   <div id="app">
    
-    <topbar title ="屠牛老师" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode"></topbar>
+    <topbar title ="屠牛老师" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode" @lang-change="langChange"></topbar>
     <div :class="[fontSize, showmenu, nightmode, 'novel-body']">
-      <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/tn-professor/main/'" @hidemenu="hidemenufunction"></novel-viewer>
+      <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/tn-professor/main/'" :lang="lang" @hidemenu="hidemenufunction"></novel-viewer>
     </div>
     
   </div>
