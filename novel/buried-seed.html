@@ -11,9 +11,9 @@
 <body>
   <div id="app">
    
-    <topbar title ="被活埋的种子" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode" ></topbar>
+    <topbar title ="被活埋的种子" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode" @lang-change="langChange"></topbar>
     <div :class="[fontSize, showmenu, nightmode, 'novel-body']">
-      <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/buried-seed/main/'" @hidemenu="hidemenufunction"></novel-viewer>
+      <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/buried-seed/main/'" :lang="lang" @hidemenu="hidemenufunction"></novel-viewer>
     </div>
     
   </div>
