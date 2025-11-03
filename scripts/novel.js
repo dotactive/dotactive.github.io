@@ -5,7 +5,11 @@ myapp.component('novel-viewer', {
       required: true
     },
     fontsize: String,
-    lang: String
+    lang: String,
+    languages: {
+      type: Array,
+      default: () => ['cn', 'tw']
+    }
   },
   computed: {
     actualNovelUrl() {
@@ -53,7 +57,9 @@ myapp.component('novel-viewer', {
   mounted() {
     this.fetchTextFiles();
     this.loadCoverImage(); // Load the cover image
-    
+
+    // Emit available languages to parent
+    this.$emit('languages-loaded', this.languages);
   },
   methods: {
     fetchTextFiles() {

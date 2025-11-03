@@ -1,34 +1,55 @@
 myapp.component('topbar', {
     props: {
-        title: String
+        title: String,
+        languages: {
+          type: Array,
+          default: () => ['cn']
+        }
       },
     template: /*html*/ `
     <header class="header bg-gray-900 text-white p-4 animation-mode"  :class="{ 'active-pos': showHeader }" ref="header">
     <div class="flex items-center justify-between">
-    
+
     <!-- Hamburger Icon -->
     <button @click="showMenu" class="menu-btn text-white p-2 focus:outline-none">
     <i class="fa-regular fa-bars fa"></i>
     </button>
     <h1 class="text-white text-2xl">{{ title }}</h1>
-    <button @click="showSetting" class="setting-btn text-white p-2 focus:outline-none">
-    
+      <div>
+          <!-- Language Dropdown -->
+ <div class="relative inline-block" v-if="languages.length > 1">
+      <button @click="toggleLangDropdown" class="text-white p-2 focus:outline-none flex items-center rounded-full w-10 h-10 overflow-hidden ">
+        <span class="text-2xl">{{ getLanguageLabel(lang) }}</span>
+        <i class=" fa-solid fa-chevron-down ml-1 text-xs hidden"></i>
+      </button>
+      <div v-if="isLangDropdownOpen" class="absolute right-0 mt-2 w-20 bg-white  shadow-lg z-50">
+        <button
+          v-for="langCode in languages"
+          :key="langCode"
+          @click="selectLanguage(langCode)"
+          class="block w-full text-center px-2 py-2 text-2xl hover:bg-gray-100"
+          :class="{ 'bg-gray-200': lang === langCode }">
+          {{ getLanguageLabel(langCode) }}
+        </button>
+      </div>
+    </div>
+
+    <button @click="showSetting" class="setting-btn text-white p-2 focus:outline-none inline-block">
+
+
     <i  v-if="isSettingOpen" class="fa fa-solid fa-times transform hover:rotate-12"></i>
     <i  v-else class="fa fa-regular fa-gear transform transition-transform duration-300 hover:rotate-180"></i>
     </button>
     <div  :class="['setting-top',  'animation-mode', { 'active-pos': isSettingOpen }]">
-    <div class="grid grid-cols-9 gap-2">
+    <div class="grid grid-cols-7 gap-2">
     <div class="title"><i class="fa fa-solid fa-font"></i></div>
     <div class="col-span-5"><input    type="range"    min="1"    max="4"    v-model="fontSizeValue"   class="slider"    @input="updateFontSize"  ></div>
-    <div></div>
-    <div class="cn-switch"><button @click="toggleChinese" :title="lang === 'cn' ? '切换到繁体' : '切換到簡體'">
-    <span v-if="lang === 'cn'">简</span>
-    <span v-else>繁</span>
-    </button></div>
     <div class="day-night"><button @click="daynight">
     <i v-if="nightMode" class="fa fa-solid fa-sun"></i>
     <i v-else  class="fa fa-solid fa-moon"></i>
-    </button></div>
+    </button>
+    </div>
+</div>
     </div>
     </div>
     </div>
@@ -40,8 +61,14 @@ myapp.component('topbar', {
         lastScrollPos: 0,
         showHeader: true, // Initially show the header
         isSettingOpen: false,
+        isLangDropdownOpen: false,
         nightMode:false,
-        lang: 'cn' // Default to simplified Chinese
+        lang: 'cn', // Default to simplified Chinese
+        languageLabels: {
+          'en': '🇺🇸',
+          'cn': '🇨🇳',
+          'tw': '🇹🇼'
+        }
       };
     },
     methods: {
@@ -59,19 +86,28 @@ myapp.component('topbar', {
           this.nightMode = !this.nightMode;
           this.$emit('day-night-mode', this.nightMode);
         },
-        toggleChinese(){
-          this.lang = this.lang === 'cn' ? 'tw' : 'cn';
+        toggleLangDropdown(){
+          this.isLangDropdownOpen = !this.isLangDropdownOpen;
+        },
+        selectLanguage(newLang){
+          if (this.lang !== newLang) {
+            this.lang = newLang;
 
-          // Update URL with language query parameter
-          try {
-            const url = new URL(window.location.href);
-            url.searchParams.set('lang', this.lang);
-            window.history.pushState({}, '', url);
-          } catch (e) {
-            console.warn('Unable to update URL:', e);
+            // Update URL with language query parameter
+            try {
+              const url = new URL(window.location.href);
+              url.searchParams.set('lang', this.lang);
+              window.history.pushState({}, '', url);
+            } catch (e) {
+              console.warn('Unable to update URL:', e);
+            }
+
+            this.$emit('lang-change', this.lang);
           }
-
-          this.$emit('lang-change', this.lang);
+          this.isLangDropdownOpen = false;
+        },
+        getLanguageLabel(langCode){
+          return this.languageLabels[langCode] || langCode.toUpperCase();
         },
         handleScroll() {
           const currentScrollPos = window.scrollY;
@@ -96,8 +132,13 @@ myapp.component('topbar', {
       try {
         const url = new URL(window.location.href);
         const langParam = url.searchParams.get('lang');
-        if (langParam === 'cn' || langParam === 'tw') {
+        // Validate that the language from URL is in available languages
+        if (langParam && this.languages.includes(langParam)) {
           this.lang = langParam;
+          this.$emit('lang-change', this.lang);
+        } else if (this.languages.length > 0 && !this.languages.includes(this.lang)) {
+          // If default lang is not in available languages, use the first available
+          this.lang = this.languages[0];
           this.$emit('lang-change', this.lang);
         }
       } catch (e) {

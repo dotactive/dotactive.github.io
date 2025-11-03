@@ -4,7 +4,8 @@ const myapp = Vue.createApp({
             fontSize: 'text-base', // Default font size is 'medium'
             showmenu: '',
             nightmode:'',
-            lang: 'cn'
+            lang: 'cn',
+            languages: ['cn', 'tw'] // Default available languages
         }
     },
     methods: {
@@ -37,6 +38,9 @@ const myapp = Vue.createApp({
         },
         langChange(lang){
             this.lang = lang;
+        },
+        setLanguages(languages){
+            this.languages = languages;
         }
     }
 });

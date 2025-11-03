@@ -18,12 +18,12 @@
 </head>
 <body>
   <div id="app">
-   
-    <topbar title ="Sage Tuna" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode"></topbar>
+
+    <topbar title ="Sage Tuna" :languages="languages" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode" @lang-change="langChange"></topbar>
     <div :class="[fontSize, showmenu, nightmode, 'novel-body']">
-      <novel-viewer :novelurl="'https://raw.githubusercontent.com/dotactive/sage-tuna/main/'" @hidemenu="hidemenufunction"></novel-viewer>
+      <novel-viewer :novelurl="'https://raw.githubusercontent.com/dotactive/sage-tuna/main/'" :languages="['en','cn']" :lang="lang" @hidemenu="hidemenufunction" @languages-loaded="setLanguages"></novel-viewer>
     </div>
-    
+
   </div>
   <script src="https://kit.fontawesome.com/07f61069d8.js" crossorigin="anonymous"></script>
   <!-- Use the production build of Vue -->
