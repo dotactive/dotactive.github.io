@@ -61,6 +61,27 @@ myapp.component('topbar', {
         },
         toggleChinese(){
           this.lang = this.lang === 'cn' ? 'tw' : 'cn';
+
+          // Update URL with language code (only works with http/https)
+          if (window.location.protocol !== 'file:') {
+            try {
+              let currentPath = window.location.pathname;
+              // Remove trailing slash if exists
+              currentPath = currentPath.replace(/\/$/, '');
+
+              // Remove existing language code if present
+              if (currentPath.endsWith('/cn') || currentPath.endsWith('/tw')) {
+                currentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+              }
+
+              // Add new language code
+              const newPath = `${currentPath}/${this.lang}`;
+              window.history.pushState({}, '', newPath);
+            } catch (e) {
+              console.warn('Unable to update URL:', e);
+            }
+          }
+
           this.$emit('lang-change', this.lang);
         },
         handleScroll() {
