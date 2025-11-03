@@ -62,9 +62,11 @@ myapp.component('topbar', {
         toggleChinese(){
           this.lang = this.lang === 'cn' ? 'tw' : 'cn';
 
-          // Update URL hash with language code
+          // Update URL with language query parameter
           try {
-            window.location.hash = this.lang;
+            const url = new URL(window.location.href);
+            url.searchParams.set('lang', this.lang);
+            window.history.pushState({}, '', url);
           } catch (e) {
             console.warn('Unable to update URL:', e);
           }
@@ -90,11 +92,16 @@ myapp.component('topbar', {
       // Attach scroll event listener
       window.addEventListener('scroll', this.handleScroll);
 
-      // Read language from URL hash on page load
-      const hash = window.location.hash.substring(1); // Remove the '#'
-      if (hash === 'cn' || hash === 'tw') {
-        this.lang = hash;
-        this.$emit('lang-change', this.lang);
+      // Read language from URL query parameter on page load
+      try {
+        const url = new URL(window.location.href);
+        const langParam = url.searchParams.get('lang');
+        if (langParam === 'cn' || langParam === 'tw') {
+          this.lang = langParam;
+          this.$emit('lang-change', this.lang);
+        }
+      } catch (e) {
+        console.warn('Unable to read URL parameters:', e);
       }
     },
     beforeDestroy() {
