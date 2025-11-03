@@ -62,24 +62,11 @@ myapp.component('topbar', {
         toggleChinese(){
           this.lang = this.lang === 'cn' ? 'tw' : 'cn';
 
-          // Update URL with language code (only works with http/https)
-          if (window.location.protocol !== 'file:') {
-            try {
-              let currentPath = window.location.pathname;
-              // Remove trailing slash if exists
-              currentPath = currentPath.replace(/\/$/, '');
-
-              // Remove existing language code if present
-              if (currentPath.endsWith('/cn') || currentPath.endsWith('/tw')) {
-                currentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
-              }
-
-              // Add new language code
-              const newPath = `${currentPath}/${this.lang}`;
-              window.history.pushState({}, '', newPath);
-            } catch (e) {
-              console.warn('Unable to update URL:', e);
-            }
+          // Update URL hash with language code
+          try {
+            window.location.hash = this.lang;
+          } catch (e) {
+            console.warn('Unable to update URL:', e);
           }
 
           this.$emit('lang-change', this.lang);
@@ -102,6 +89,13 @@ myapp.component('topbar', {
     mounted() {
       // Attach scroll event listener
       window.addEventListener('scroll', this.handleScroll);
+
+      // Read language from URL hash on page load
+      const hash = window.location.hash.substring(1); // Remove the '#'
+      if (hash === 'cn' || hash === 'tw') {
+        this.lang = hash;
+        this.$emit('lang-change', this.lang);
+      }
     },
     beforeDestroy() {
       // Remove scroll event listener
