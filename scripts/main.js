@@ -5,7 +5,8 @@ const myapp = Vue.createApp({
             showmenu: '',
             nightmode:'',
             lang: 'cn',
-            languages: ['cn', 'tw'] // Default available languages
+            languages: ['cn', 'tw'], // Default available languages
+            novelTitle: '' // Novel title from JSON
         }
     },
     methods: {
@@ -41,6 +42,9 @@ const myapp = Vue.createApp({
         },
         setLanguages(languages){
             this.languages = languages;
+        },
+        setTitle(title){
+            this.novelTitle = title;
         }
     }
 });

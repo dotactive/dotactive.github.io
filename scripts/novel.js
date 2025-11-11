@@ -24,7 +24,8 @@ myapp.component('novel-viewer', {
       showMenu: false,
       files: [],
       paragraphs: {},
-      coverImage: '' // Initialize cover image URL
+      coverImage: '', // Initialize cover image URL
+      title: '' // Initialize novel title
     };
   },
   template:
@@ -67,6 +68,8 @@ myapp.component('novel-viewer', {
         .then(response => response.json())
         .then(data => {
           this.files = data.files;
+          this.title = data.title;
+          this.$emit('title-loaded', data.title);
           // Fetch each text file and store its content in the 'paragraphs' object
           const fetchPromises = this.files.map(fileName => {
             return fetch(`${this.actualNovelUrl}${fileName}`)
@@ -119,6 +122,7 @@ myapp.component('novel-viewer', {
       this.files = [];
       this.paragraphs = {};
       this.coverImage = '';
+      this.title = '';
       this.fetchTextFiles();
       this.loadCoverImage();
 
