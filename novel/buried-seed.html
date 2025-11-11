@@ -6,14 +6,14 @@
 
   <link href="../dist/output.css" rel="stylesheet">
   <link href="../css/main.css" rel="stylesheet">
-  <title>被活埋的种子</title>
+  <title>Loading...</title>
 </head>
 <body>
   <div id="app">
 
-    <topbar title ="被活埋的种子" :languages="languages" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode" @lang-change="langChange"></topbar>
+    <topbar :title="novelTitle" :languages="languages" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode" @lang-change="langChange"></topbar>
     <div :class="[fontSize, showmenu, nightmode, 'novel-body']">
-      <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/buried-seed/main/'" :languages="['cn', 'tw']" :lang="lang" @hidemenu="hidemenufunction" @languages-loaded="setLanguages"></novel-viewer>
+      <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/buried-seed/main/'" :languages="['cn', 'tw', 'en']" :lang="lang" @hidemenu="hidemenufunction" @languages-loaded="setLanguages" @title-loaded="setTitle"></novel-viewer>
     </div>
 
   </div>
