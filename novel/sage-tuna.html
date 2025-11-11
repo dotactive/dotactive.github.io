@@ -14,7 +14,7 @@
 
     <topbar title ="屠牛老师" :languages="languages" @select-font-size="updateFontSize" @showmenu="showmenufunction" @day-night-mode="dayNightMode" @lang-change="langChange"></topbar>
     <div :class="[fontSize, showmenu, nightmode, 'novel-body']">
-      <novel-viewer :novelurl="'https://raw.githubusercontent.com/pinktit/tn-professor/main/'" :languages="['cn', 'tw','en']" :lang="lang" @hidemenu="hidemenufunction" @languages-loaded="setLanguages"></novel-viewer>
+      <novel-viewer :novelurl="'https://raw.githubusercontent.com/dotactive/sage-tuna/main/'" :languages="['cn','tw','en']" :lang="lang" @hidemenu="hidemenufunction" @languages-loaded="setLanguages"></novel-viewer>
     </div>
 
   </div>
