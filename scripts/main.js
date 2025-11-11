@@ -58,5 +58,13 @@ const myapp = Vue.createApp({
         } catch (e) {
             console.warn('Unable to read URL parameters:', e);
         }
+    },
+    watch: {
+        novelTitle(newTitle) {
+            // Update document title when novelTitle changes
+            if (newTitle) {
+                document.title = newTitle;
+            }
+        }
     }
 });
