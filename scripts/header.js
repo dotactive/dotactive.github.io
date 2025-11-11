@@ -132,8 +132,8 @@ myapp.component('topbar', {
       try {
         const url = new URL(window.location.href);
         const langParam = url.searchParams.get('lang');
-        // Validate that the language from URL is in available languages
-        if (langParam && this.languages.includes(langParam)) {
+        // Use URL parameter if present (languages list may not be fully loaded yet)
+        if (langParam) {
           this.lang = langParam;
           this.$emit('lang-change', this.lang);
         } else if (this.languages.length > 0 && !this.languages.includes(this.lang)) {

@@ -46,5 +46,17 @@ const myapp = Vue.createApp({
         setTitle(title){
             this.novelTitle = title;
         }
+    },
+    mounted() {
+        // Read language from URL query parameter on page load
+        try {
+            const url = new URL(window.location.href);
+            const langParam = url.searchParams.get('lang');
+            if (langParam) {
+                this.lang = langParam;
+            }
+        } catch (e) {
+            console.warn('Unable to read URL parameters:', e);
+        }
     }
 });
