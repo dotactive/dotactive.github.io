@@ -17,17 +17,17 @@ myapp.component('topbar', {
     <h1 class="text-white text-2xl">{{ title }}</h1>
       <div>
           <!-- Language Dropdown -->
- <div class="relative inline-block" v-if="languages.length > 1">
-      <button @click="toggleLangDropdown" class="text-white p-2 focus:outline-none flex items-center rounded-full w-10 h-10 overflow-hidden ">
-        <span class="text-2xl">{{ getLanguageLabel(lang) }}</span>
-        <i class=" fa-solid fa-chevron-down ml-1 text-xs hidden"></i>
+ <div class="float-left mt-3 inline-block" v-if="languages.length > 1">
+      <button @click="toggleLangDropdown" class="border border-white text-white px-2 py-1 focus:outline-none flex items-center whitespace-nowrap">
+        <span class="text-sm pr-1">{{ getLanguageLabel(lang) }}</span>
+        <i class="fa fa-solid fa-chevron-down ml-1 text-xs"></i>
       </button>
-      <div v-if="isLangDropdownOpen" class="absolute right-0 mt-2 w-20 bg-white  shadow-lg z-50">
+      <div v-if="isLangDropdownOpen" class="absolute right-0 mt-2 bg-white shadow-lg z-50 min-w-max">
         <button
           v-for="langCode in languages"
           :key="langCode"
           @click="selectLanguage(langCode)"
-          class="block w-full text-center px-2 py-2 text-2xl hover:bg-gray-100"
+          class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 whitespace-nowrap text-gray-800"
           :class="{ 'bg-gray-200': lang === langCode }">
           {{ getLanguageLabel(langCode) }}
         </button>
@@ -65,9 +65,9 @@ myapp.component('topbar', {
         nightMode:false,
         lang: 'cn', // Default to simplified Chinese
         languageLabels: {
-          'en': '🇺🇸',
-          'cn': '🇨🇳',
-          'tw': '🇹🇼'
+          'en': 'English',
+          'cn': '简体中文',
+          'tw': '繁體中文'
         }
       };
     },
